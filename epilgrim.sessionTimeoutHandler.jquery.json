@@ -15,13 +15,12 @@
 	"licenses": [
 		{
 			"type": "MIT",
-			"url": "https://github.com/Epilgrim/jquery-sessionTimeout/blob/master/license.txt"
+			"url": "https://github.com/Epilgrim/jquerySessionTimeoutHandler/blob/master/license.txt"
 		}
 	],
-	"bugs": "https://github.com/jquery/jquery-sessionTimeout/issues",
-	"homepage": "https://github.com/jquery/jquery-sessionTimeout",
-	"docs": "https://github.com/jquery/jquery-sessionTimeout",
-	"download": "http://code.jquery.com/#color",
+	"bugs": "https://github.com/Epilgrim/jquerySessionTimeoutHandler/issues",
+	"homepage": "https://github.com/Epilgrim/jquerySessionTimeoutHandler",
+	"docs": "https://github.com/Epilgrim/jquerySessionTimeoutHandler",
 	"dependencies": {
 		"jquery": ">=1.6.4"
 	}
