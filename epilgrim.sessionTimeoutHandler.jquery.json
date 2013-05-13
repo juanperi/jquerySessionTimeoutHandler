@@ -1,5 +1,5 @@
 {
-	"name": "epilgrim.sessionTimeout",
+	"name": "epilgrim.sessionTimeoutHandler",
 	"title": "ui Session Timeout",
 	"description": "Given a certain amount of time before the session expires, a dialog is shown to the user with the option to either log out now, or stay connected. The time left of the session is retrieved from the server through ajax in json format or through configuration. This implementation with its default values works nicely with multiple tabs (as is the server who controls the time left the session has)",
 	"keywords": [
@@ -7,7 +7,7 @@
 		"session",
 		"timeout"
 	],
-	"version": "v1.0.0",
+	"version": "0.7.0",
 	"author": {
 		"name": "Juan Peri",
 		"email": "eternoperegrino@gmail.com"

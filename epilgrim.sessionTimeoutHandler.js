@@ -1,5 +1,5 @@
  $(function() {
-    $.widget( "epilgrim.sessionTimeout", {
+    $.widget( "epilgrim.sessionTimeoutHandler", {
         options: {
             // default options
             title :                  'Session Timeout',
