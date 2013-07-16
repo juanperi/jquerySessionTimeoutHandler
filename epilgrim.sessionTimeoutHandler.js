@@ -1,4 +1,4 @@
- $(function() {
+(function($, window, undefined){
     $.widget( "epilgrim.sessionTimeoutHandler", {
         options: {
             // default options
@@ -156,4 +156,4 @@
             }
         }
     });
-});
+})(jQuery, window);
