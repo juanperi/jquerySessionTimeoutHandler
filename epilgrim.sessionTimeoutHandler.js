@@ -35,7 +35,7 @@
             },
             getSessionTimeLeft: function ( event, data ){
                 var action = data.updateSession ? data.plugin.options.keepAliveUrl : data.plugin.options.retrieveTimeLeftUrl;
-                self = data.plugin;
+                var self = data.plugin;
                 $.ajax({
                     context: self,
                     dataType: "json",
@@ -79,11 +79,11 @@
                 buttons: {
                     // Button one - takes user to logout URL
                     "Log Out Now": function() {
-                        self._trigger('logOutNow', null, { plugin: self })
+                        self._trigger('logOutNow', null, { plugin: self });
                     },
                     // Button two - closes dialog and makes call to keep-alive URL
                     "Stay Connected": function() {
-                        self._trigger('stayConnected', null, { plugin: self })
+                        self._trigger('stayConnected', null, { plugin: self });
                     }
                 }
             });
