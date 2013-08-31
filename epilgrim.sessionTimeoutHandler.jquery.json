@@ -1,13 +1,13 @@
 {
 	"name": "epilgrim.sessionTimeoutHandler",
-	"title": "ui Session Timeout",
+	"title": "Jquery Session Timeout Handler",
 	"description": "Given a certain amount of time before the session expires, a dialog is shown to the user with the option to either log out now, or stay connected. The time left of the session is retrieved from the server through ajax in json format or through configuration. This implementation with its default values works nicely with multiple tabs (as is the server who controls the time left the session has)",
 	"keywords": [
 		"ui",
 		"session",
 		"timeout"
 	],
-	"version": "0.7.3",
+	"version": "0.7.4",
 	"author": {
 		"name": "Juan Peri",
 		"email": "eternoperegrino@gmail.com"

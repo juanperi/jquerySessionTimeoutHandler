@@ -1,4 +1,4 @@
-# sessionTimeout
+# sessionTimeoutHandler
 
 ## Description
 
@@ -16,8 +16,8 @@ The example uses PHP. Open default.php to view.
 
 1. Include jQuery
 2. Include jQuery UI (for dialog)
-3. Include jquery.sessionTimeout.js
-4. Call `$.sessionTimeout();` after document ready
+3. Include jquery.sessionTimeoutHandler.js
+4. Call `$.sessionTimeoutHandler();` after document ready
 
 ## Options
 
@@ -87,14 +87,14 @@ _Default:_ sessionTimeout-dialog
 **Default** - Get Time left from server. Send Keep Alive. Check if session still active before redirect
 
 ```javascript
-$('body').sessionTimeout();
+$('body').sessionTimeoutHandler();
 ```
 
 
 **Just timer** - Don't send keepAlive to server - Don't bring time left from server
 
 ```javascript
-$('body').sessionTimeout({
+$('body').sessionTimeoutHandler({
     redirUrl :               'timedOut.php',
     logoutUrl :              'logout.php',
     warnWhenLeft :            10000,
@@ -109,7 +109,7 @@ $('body').sessionTimeout({
 
 **Keep Alive** - But don't bring time left from server
 ```javascript
-$('body').sessionTimeout({
+$('body').sessionTimeoutHandler({
     keepAliveUrl :           'keepAlive.php',
     redirUrl :               'timedOut.php',
     logoutUrl :              'logout.php',
