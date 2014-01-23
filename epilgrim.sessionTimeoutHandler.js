@@ -34,14 +34,23 @@
                 );
             },
             getSessionTimeLeft: function ( event, data ){
-                var action = data.updateSession ? data.plugin.options.keepAliveUrl : data.plugin.options.retrieveTimeLeftUrl;
+               var action = data.updateSession ? data.plugin.options.keepAliveUrl : data.plugin.options.retrieveTimeLeftUrl;
                 var self = data.plugin;
+                var modal_id = data.plugin.options.modalId;
+                var warnBefore = data.plugin.options.warnWhenLeft;
                 $.ajax({
                     context: self,
                     dataType: "json",
                     url: action,
                     success: function (time){
-                        data.callback.call(self, time * 1000);
+                        var timeleft = time * 1000
+                        data.callback.call(self, timeleft);
+                        if((timeleft - warnBefore) > 500)//greater than 500ms close the popup
+                        {
+                            var dialog = jQuery('#ms_timeout_dialog').parent();
+                            dialog.hide();
+                            dialog.siblings('.ui-widget-overlay').hide();
+                        }
                     },
                     error: function(){
                         alert(self.options.errorGettingSessionTimeLeft);
