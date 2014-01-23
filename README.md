@@ -1,15 +1,6 @@
 # sessionTimeoutHandler
 
 ## Description
-**Update** : 
-Updated the timeleft method to handle the case when you have 2 active session in different tab/ browser. 
-The popup comes in one browser, but even if you are using the session actively in another tab / browser.
-In such case server will return a higher timeleft value but the pop-up still remains open. 
-
-Made changes to close the pop-up if timeleft is a higher value than the warnwhenleft time.
-
-
-so that the pop up closes by itself if there is an active sessin in another tab/browser
 
 Given a certain amount of time before the session expires, a dialog is shown to the user with the option to either log out now, or stay connected.
 
@@ -20,6 +11,9 @@ The time left of the session is retrieved from the server through ajax in json f
 This implementation with its default values works nicely with multiple tabs (as is the server who controls the time left the session has)
 
 The example uses PHP. Open default.php to view.
+
+**Update** :
+In case that the session is actively used in another tab, the popup will be automatically closed in the inactive tabs.
 
 ## Usage
 
