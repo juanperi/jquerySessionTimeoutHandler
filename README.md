@@ -1,6 +1,15 @@
 # sessionTimeoutHandler
 
 ## Description
+**Update** : 
+Updated the timeleft method to handle the case when you have 2 active session in different tab/ browser. 
+The popup comes in one browser, but even if you are using the session actively in another tab / browser.
+In such case server will return a higher timeleft value but the pop-up still remains open. 
+
+Made changes to close the pop-up if timeleft is a higher value than the warnwhenleft time.
+
+
+so that the pop up closes by itself if there is an active sessin in another tab/browser
 
 Given a certain amount of time before the session expires, a dialog is shown to the user with the option to either log out now, or stay connected.
 
