@@ -1,7 +1,7 @@
 <?php
 session_start();
 // do whatever you need to destroy the session
-$_SESSION = array();
+$_SESSION = array('lastAccess' => 0);
 ?>
 <!DOCTYPE html>
 <html>
