@@ -6,7 +6,7 @@
             message :                'Your session is about to expire.',
             keepAliveUrl :           'keepAlive.php',
             retrieveTimeLeftUrl :    'retrieveTimeLeft.php',
-            redirUrl :               'timedOut.php',
+            redirUrl :               false,
             logoutUrl :              'logout.php',
             defaultSessionTime:       false,
             warnWhenLeft :            300000,
@@ -17,6 +17,9 @@
             // callbacks
             logOutNow: function(event, data){
                 window.location = data.plugin.options.logoutUrl;
+            },
+            redirectNow: function(event, data){
+                window.location = data.plugin.options.redirUrl;
             },
             stayConnected: function(event, data){
                 data.plugin.modal.dialog('close');
@@ -61,6 +64,10 @@
 
             // timer for redirecting
             this.redirectTimer = null;
+
+            if (this.options.redirUrl == false){
+                this.options.redirUrl = this.options.logoutUrl;
+            }
 
             this._createModal();
 
@@ -133,13 +140,13 @@
             if (this.options.checkTimeBeforeRedirect){
                 this._trigger('getSessionTimeLeft', null, {plugin: this, updateSession: false, callback: function(time){
                     if (time <= 0){
-                        this._trigger('logOutNow', null, {plugin: this});
+                        this._trigger('redirectNow', null, {plugin: this});
                     } else {
                         this.initializeTimers(time);
                     }
                 }});
             } else {
-                this._trigger('logOutNow', null, {plugin: this});
+                this._trigger('redirectNow', null, {plugin: this});
             }
         },
         _setTimers: function (time){

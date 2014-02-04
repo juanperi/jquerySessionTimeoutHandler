@@ -10,7 +10,7 @@ The time left of the session is retrieved from the server through ajax in json f
 
 This implementation with its default values works nicely with multiple tabs (as is the server who controls the time left the session has)
 
-The example uses PHP. Open default.php to view.
+The example uses PHP. Open index.php to view.
 
 **Update** :
 In case that the session is actively used in another tab, the popup will be automatically closed in the inactive tabs.
@@ -46,8 +46,8 @@ _Default:_ 'keepAlive.php'
 
 - **redirUrl**
 
-URL to take browser to if no action is take before session times out
-_Default:_ 'timedOut.php'
+URL to take browser to if no action is taken before the session times out. If false, the user will be redirected to the logoutUrl
+_Default:_ 'false'
 
 - **logoutUrl**
 
@@ -56,7 +56,7 @@ _Default:_ 'logout.php'
 
 - **defaultSessionTime**
 
-Default session timeTime in milliseconds.
+Default session time in milliseconds.
 
 If set to false, the time will be retrieved from the server via retrieveTimeLeftUrl.
 
