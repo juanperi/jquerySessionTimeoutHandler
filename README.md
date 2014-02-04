@@ -27,61 +27,67 @@ In case that the session is actively used in another tab, the popup will be auto
 - **title**
 
 Title of the dialog window shown to the user.
+
 _Default:_ 'Your session is about to expire.'
 
 - **message**
 
 Text of the dialog window shown to the user.
+
 _Default:_ 'Your session is about to expire.'
 
 - **keepAliveUrl**
 
 URL to call through AJAX to keep session alive. This request resets the session timeout.
+
 _Default:_ 'keepAlive.php'
 
 - **retrieveTimeLeftUrl**
 
-URL to call through AJAX to get how much time left this session has. This request doesn´t update the session timeout
+URL to call through AJAX to get how much time left this session has. This request doesn´t update the session timeout.
+
 _Default:_ 'keepAlive.php'
 
 - **redirUrl**
 
-URL to take browser to if no action is taken before the session times out. If false, the user will be redirected to the logoutUrl
+URL to take browser to if no action is taken before the session times out. If false, the user will be redirected to the logoutUrl.
+
 _Default:_ 'false'
 
 - **logoutUrl**
 
-URL to take browser to if user clicks "Log Out Now"
+URL to take browser to if user clicks "Log Out Now".
+
 _Default:_ 'logout.php'
 
 - **defaultSessionTime**
 
 Default session time in milliseconds.
-
 If set to false, the time will be retrieved from the server via retrieveTimeLeftUrl.
 
 _Default:_ false
 
 - **warnWhenLeft**
 
-Time in milliseconds before the session expires to open the dialog
+Time in milliseconds before the session expires to open the dialog.
+
 _Default:_ 300000 (5 minutes)
 
 - **checkTimeBeforeRedirect**
 
-If true, before issuing a redirect to redirUrl, will ask the server if the session has time left. If it has, will reset the timers accordingly. This way different tabs will be synchronized
+If true, before issuing a redirect to redirUrl, will ask the server if the session has time left. If it has, will reset the timers accordingly. This way different tabs will be synchronized.
 
 _Default:_ true
 
 - **errorGettingSessionTimeLeft**
 
-Message to alert the user if there was an error retrieving the time left from the server
+Message to alert the user if there was an error retrieving the time left from the server.
 
 _Default:_ There was an error retrieving session information from the server. Session could be timed out
 
 - **modalId**
 
-Id of the modal window generated
+Id of the modal window generated.
 
 _Default:_ sessionTimeout-dialog
 
