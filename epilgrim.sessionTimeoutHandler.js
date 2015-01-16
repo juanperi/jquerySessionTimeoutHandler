@@ -6,17 +6,21 @@
             message :                'Your session is about to expire.',
             keepAliveUrl :           'keepAlive.php',
             retrieveTimeLeftUrl :    'retrieveTimeLeft.php',
-            redirUrl :               'timedOut.php',
+            redirUrl :               false,
             logoutUrl :              'logout.php',
             defaultSessionTime:       false,
             warnWhenLeft :            300000,
             checkTimeBeforeRedirect:  true,
+            checkTimeBeforePopup:     false,
             errorGettingSessionTimeLeft:  'There was an error retrieving session information from the server. Session could be timed out',
             modalId:                 'sessionTimeout-dialog',
 
             // callbacks
             logOutNow: function(event, data){
                 window.location = data.plugin.options.logoutUrl;
+            },
+            redirectNow: function(event, data){
+                window.location = data.plugin.options.redirUrl;
             },
             stayConnected: function(event, data){
                 data.plugin.modal.dialog('close');
@@ -34,22 +38,17 @@
                 );
             },
             getSessionTimeLeft: function ( event, data ){
-               var action = data.updateSession ? data.plugin.options.keepAliveUrl : data.plugin.options.retrieveTimeLeftUrl;
+                var action = data.updateSession ? data.plugin.options.keepAliveUrl : data.plugin.options.retrieveTimeLeftUrl;
                 var self = data.plugin;
-                var modal_id = data.plugin.options.modalId;
-                var warnBefore = data.plugin.options.warnWhenLeft;
                 $.ajax({
                     context: self,
                     dataType: "json",
                     url: action,
                     success: function (time){
-                        var timeleft = time * 1000
-                        data.callback.call(self, timeleft);
-                        if((timeleft - warnBefore) > 500)//greater than 500ms close the popup
-                        {
-                            var dialog = jQuery('#ms_timeout_dialog').parent();
-                            dialog.hide();
-                            dialog.siblings('.ui-widget-overlay').hide();
+                        var timeLeft = time * 1000;
+                        data.callback.call(self, timeLeft);
+                        if(timeLeft > this.options.warnWhenLeft){//greater than 500ms close the popup
+                            this.modal.dialog('close');
                         }
                     },
                     error: function(){
@@ -65,6 +64,10 @@
 
             // timer for redirecting
             this.redirectTimer = null;
+
+            if (this.options.redirUrl == false){
+                this.options.redirUrl = this.options.logoutUrl;
+            }
 
             this._createModal();
 
@@ -131,19 +134,29 @@
             }
         },
         _dialogHandler: function(){
-            this.modal.dialog('open');
+            if(this.options.checkTimeBeforePopup){
+                 this._trigger('getSessionTimeLeft', null, {plugin: this, updateSession: false, callback: function(time){
+                    if (time <= 60000){
+                        this.modal.dialog('open');
+                    } else {
+                        this.initializeTimers(time);
+                    }
+                }});
+            }else{
+                this.modal.dialog('open');
+            }
         },
         _redirectHandler: function(){
             if (this.options.checkTimeBeforeRedirect){
                 this._trigger('getSessionTimeLeft', null, {plugin: this, updateSession: false, callback: function(time){
                     if (time <= 0){
-                        this._trigger('logOutNow', null, {plugin: this});
+                        this._trigger('redirectNow', null, {plugin: this});
                     } else {
                         this.initializeTimers(time);
                     }
                 }});
             } else {
-                this._trigger('logOutNow', null, {plugin: this});
+                this._trigger('redirectNow', null, {plugin: this});
             }
         },
         _setTimers: function (time){
@@ -152,7 +165,7 @@
             action = this.dialogTimer === null ? 'start' : 'restart';
             this._dialogTimer( action, (time - this.options.warnWhenLeft));
 
-            action = this.redirTimer === null ? 'start' : 'restart';
+            action = this.redirectTimer === null ? 'start' : 'restart';
             this._redirectTimer ( action, time);
         },
         initializeTimers: function (time){
