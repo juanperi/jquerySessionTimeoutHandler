@@ -77,6 +77,11 @@ _Default:_ 300000 (5 minutes)
 
 If true, before issuing a redirect to redirUrl, will ask the server if the session has time left. If it has, will reset the timers accordingly. This way different tabs will be synchronized.
 
+- **checkTimeBeforePopup**
+
+If true, before showing the popup, it will ask the server if the session has time left. If it has, it will reset the timers accordingly. This way the popup won't be showed in a tab if another tab has activity.
+
+
 _Default:_ true
 
 - **errorGettingSessionTimeLeft**
