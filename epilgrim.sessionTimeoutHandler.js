@@ -11,6 +11,7 @@
             defaultSessionTime:       false,
             warnWhenLeft :            300000,
             checkTimeBeforeRedirect:  true,
+            checkTimeBeforePopup:     false,
             errorGettingSessionTimeLeft:  'There was an error retrieving session information from the server. Session could be timed out',
             modalId:                 'sessionTimeout-dialog',
 
@@ -46,8 +47,7 @@
                     success: function (time){
                         var timeLeft = time * 1000;
                         data.callback.call(self, timeLeft);
-                        if(timeLeft > this.options.warnWhenLeft)//greater than 500ms close the popup
-                        {
+                        if(timeLeft > this.options.warnWhenLeft){//greater than 500ms close the popup
                             this.modal.dialog('close');
                         }
                     },
@@ -134,7 +134,17 @@
             }
         },
         _dialogHandler: function(){
-            this.modal.dialog('open');
+            if(this.options.checkTimeBeforePopup){
+                 this._trigger('getSessionTimeLeft', null, {plugin: this, updateSession: false, callback: function(time){
+                    if (time <= 60000){
+                        this.modal.dialog('open');
+                    } else {
+                        this.initializeTimers(time);
+                    }
+                }});
+            }else{
+                this.modal.dialog('open');
+            }
         },
         _redirectHandler: function(){
             if (this.options.checkTimeBeforeRedirect){
@@ -155,7 +165,7 @@
             action = this.dialogTimer === null ? 'start' : 'restart';
             this._dialogTimer( action, (time - this.options.warnWhenLeft));
 
-            action = this.redirTimer === null ? 'start' : 'restart';
+            action = this.redirectTimer === null ? 'start' : 'restart';
             this._redirectTimer ( action, time);
         },
         initializeTimers: function (time){
