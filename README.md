@@ -1,5 +1,11 @@
 # sessionTimeoutHandler
 
+## Disclaimer
+
+This plugin was created years ago. The web has evolved. This is probably not
+the best way to handle this problem anymore (not even sure if it ever was, but
+it used to work)
+
 ## Description
 
 Given a certain amount of time before the session expires, a dialog is shown to the user with the option to either log out now, or stay connected.
